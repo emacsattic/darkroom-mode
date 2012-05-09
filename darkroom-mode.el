@@ -3,7 +3,7 @@
 ;; Author: Martin Svenson
 ;; Usage: M-x darkroom-mode
 ;; License: free for all usages/modifications/distributions/whatever.
-;; Requirements: w32-fullscreen.el or something similar under *nix
+;; Requirements: w32-fullscreen.el on Windows
 
 (require 'cl)
 
