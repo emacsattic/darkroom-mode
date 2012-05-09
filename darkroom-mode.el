@@ -54,6 +54,7 @@
 		      left-margin-width
 		      right-margin-width))
 
+;;;###autoload
 (defun darkroom-mode ()
   (interactive)
   (cond ((darkroom-mode-enabledp)
@@ -194,12 +195,14 @@
 			     (height . ,(darkroom-recall 'frame-height)))))
 
 ;;;;;;;;;;;; small margins darkroom ;;;
+;;;###autoload
 (defun darkroom-mode-small()
   (interactive)
   (let ((darkroom-mode-left-margin 1)
 	(darkroom-mode-right-margin 1))
     (darkroom-mode)))
 
+;;;###autoload
 (defun darkroom-mode-ecb()
   (interactive)
   (let ((darkroom-mode-left-margin 10)
