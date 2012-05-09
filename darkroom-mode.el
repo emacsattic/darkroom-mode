@@ -12,21 +12,37 @@
         
 (require 'frame-local-vars)
 
-;; ------ configuration -----
-(defvar darkroom-mode-face-foreground "NavajoWhite"
-  "The foreground color of the default face")
+;; ------ Customization -----
+(defgroup darkroom nil
+  "A full-screen mode for distraction-free editing."
+  :group 'convenience)
 
-(defvar darkroom-mode-left-margin 30
-  "Margin to add to the left side of the screen, depends on your resolution and prefered column width")
+(defcustom darkroom-mode-face-foreground "NavajoWhite"
+  "The foreground color of the default face"
+  :type 'string
+  :group 'darkroom)
 
-(defvar darkroom-mode-right-margin 30
-  "Margin to add to the right side of the screen, depends on your resolution and prefered column width")
+(defcustom darkroom-mode-left-margin 30
+  "Margin to add to the left side of the screen."
+  :type 'integer
+  :group 'darkroom)
 
-(defvar darkroom-mode-enable-multi-monitor-support t
-  "Whether to enable multi-frame (i.e multiple monitor) support. An option since this feature is experimental")
+(defcustom darkroom-mode-right-margin 30
+  "Margin to add to the right side of the screen."
+  :type 'integer
+  :group 'darkroom)
 
-(defvar darkroom-mode-enable-longline-wrap t
-  "If longlines-mode is enabled, should longlines-wrap-follows-window-size also be enabled when going into darkroom mode?")
+(defcustom darkroom-mode-enable-multi-monitor-support t
+  "Whether to enable multi-frame (i.e. multiple monitor) support.
+Optional since this feature is experimental."
+  :type 'boolean
+  :group 'darkroom)
+
+(defcustom darkroom-mode-enable-longline-wrap t
+  "If `longlines-mode', should `longlines-wrap-follows-window-size'
+also be enabled on entering `darkroom-mode'?"
+  :type 'boolean
+  :group 'darkroom)
 
 ;; -------- code start -------
 (setq *darkroom-mode-memtable* (make-hash-table))
