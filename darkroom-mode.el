@@ -17,11 +17,6 @@
   "A full-screen mode for distraction-free editing."
   :group 'convenience)
 
-(defcustom darkroom-mode-face-foreground "NavajoWhite"
-  "The foreground color of the default face"
-  :type 'string
-  :group 'darkroom)
-
 (defcustom darkroom-mode-left-margin 30
   "Margin to add to the left side of the screen."
   :type 'integer
@@ -80,26 +75,6 @@ also be enabled on entering `darkroom-mode'?"
 
 (defun darkroom-mode-enable()
   (interactive)
-  ; ----- colors
-  ; - remember colors
-  (darkroom-remember 'background-color (frame-parameter nil 'background-color))
-  (darkroom-remember 'foreground-color (frame-parameter nil 'foreground-color))
-  (darkroom-remember 'cursor-color (frame-parameter nil 'cursor-color))
-  (darkroom-remember 'fc-bg-region (face-background 'region))
-  (darkroom-remember 'fc-fg-region (face-foreground 'region))
-  (darkroom-remember 'fc-bg-modeline (face-background 'mode-line))
-  (darkroom-remember 'fc-fg-modeline (face-foreground 'mode-line))
-  ; - set colors
-  (modify-frame-parameters
-   (selected-frame)
-   `((background-color . "black")
-     (foreground-color . ,darkroom-mode-face-foreground)
-     (cursor-color . "white")))
-  (set-face-foreground 'region "black" (selected-frame))
-  (set-face-background 'region "green" (selected-frame))
-  (set-face-foreground 'mode-line "gray15" (selected-frame))
-  (set-face-background 'mode-line "black" (selected-frame))
-  
   ; ----- margins
   ; note: margins are buffer local, so if multi-monitor support is
   ;       enabled, frame-locals are used. Otherwise, it's set
@@ -154,21 +129,7 @@ also be enabled on entering `darkroom-mode'?"
 
 (defun darkroom-mode-disable()
   (interactive)
-  ; - restore colors
-  (modify-frame-parameters
-   (selected-frame)
-   `((background-color . ,(darkroom-recall 'background-color))
-     (foreground-color . ,(darkroom-recall 'foreground-color))
-     (cursor-color . ,(darkroom-recall 'cursor-color))))
-  (set-face-foreground 'region
-		       (darkroom-recall 'fc-fg-region) (selected-frame))
-  (set-face-background 'region
-		       (darkroom-recall 'fc-bg-region) (selected-frame))
-  (set-face-foreground 'mode-line
-		       (darkroom-recall 'fc-fg-modeline) (selected-frame))
-  (set-face-background 'mode-line
-		       (darkroom-recall 'fc-bg-modeline) (selected-frame))
-  ; - restore other settings
+  ; - restore settings
   (modify-frame-parameters
    (selected-frame)
    `((line-spacing . ,(darkroom-recall 'line-spacing))))
