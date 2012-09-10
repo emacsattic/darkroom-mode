@@ -39,6 +39,16 @@ also be enabled on entering `darkroom-mode'?"
   :type 'boolean
   :group 'darkroom)
 
+(defcustom darkroom-mode-enable-hook nil
+  "Hook called by darkroom-mode-enable."
+  :type 'hook
+  :group 'darkroom)
+
+(defcustom darkroom-mode-enable-hook nil
+  "Hook called by darkroom-mode-disable."
+  :type 'hook
+  :group 'darkroom)
+
 ;; -------- code start -------
 (setq *darkroom-mode-memtable* (make-hash-table))
 
@@ -124,11 +134,15 @@ also be enabled on entering `darkroom-mode'?"
   (if (eq window-system 'w32)
       (w32-fullscreen-on)
     (set-frame-parameter nil 'fullscreen 'fullboth))
+
+  (run-hooks 'darkroom-mode-enable-hook)
   (darkroom-mode-set-enabled t)
   (message (format "darkroom mode enabled on %s" (selected-frame))))
 
 (defun darkroom-mode-disable()
   (interactive)
+  (run-hooks 'darkroom-mode-disable-hook)
+
   ; - restore settings
   (modify-frame-parameters
    (selected-frame)
