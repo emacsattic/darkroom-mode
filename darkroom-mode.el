@@ -1,4 +1,4 @@
-;;; darkroom-mode.el - Distraction free editing mode
+;;; darkroom-mode.el --- Distraction free editing mode
 
 ;; Author: Martin Svenson
 ;; Usage: M-x darkroom-mode
